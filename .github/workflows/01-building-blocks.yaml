@@ -11,7 +11,7 @@ jobs:
     echo-goodbye:
         runs-on: ubuntu-latest
         steps:
-            - name: Sucessful excution
+            - name: Sucessful execution
               run: |
                 echo "This excecution suceeded"
                 exit 0
