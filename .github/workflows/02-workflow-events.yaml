@@ -7,4 +7,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Show the trigger
-              run: echo"workflow was triggered bu {{github.on}}"
+              run: echo"workflow was triggered by ${{github.event_name}}"
