@@ -1,0 +1,10 @@
+name: 02-workflow-events.yaml
+
+on: push
+
+jobs:
+    echo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Show the trigger
+              run: echo"workflow was triggered bu {{github.on}}"
