@@ -27,3 +27,5 @@ jobs:
             npm ci
         - name: Run Tests
           run: npm run test
+        - name: Build React App
+          run: npm run build
