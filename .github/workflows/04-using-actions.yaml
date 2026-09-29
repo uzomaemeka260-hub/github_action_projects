@@ -6,6 +6,9 @@ on:
 
 jobs:
     build:
+        defaults:
+          run:
+            working-directory: 04-using-actions/react-app
         runs-on: ubuntu-latest
         steps:
         - name: checkout code
@@ -22,7 +25,5 @@ jobs:
           run: |
             echo "Installing Dependencies"
             npm ci
-          working-directory: 04-using-actions/react-app
         - name: Run Tests
           run: npm run test
-          working-directory: 04-using-actions/react-app
