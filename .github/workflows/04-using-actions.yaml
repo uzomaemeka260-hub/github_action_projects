@@ -22,5 +22,5 @@ jobs:
         - name: Install Dependencies
           run: |
             echo "Installing Dependencies"
-            cd 04-using-actions\react-app
+            cd 04-using-actions/react-app
             npm ci
