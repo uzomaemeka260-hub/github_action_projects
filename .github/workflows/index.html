@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps & Cloud Infrastructure Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --accent-color: #38bdf8;
+            --card-bg: #1e293b;
+            --code-bg: #0b0f19;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        h3 {
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            color: #38bdf8;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 DevOps & Cloud Infrastructure Engineer</h1>
+            <p><strong>Impact Statement:</strong> I design high-availability, fault-tolerant network topologies that
+                bridge full-stack architectures with automated delivery systems. Specializing in secure, multi-AZ cloud
+                infrastructures, multi-stage container optimization, and declarative Infrastructure as Code (IaC)
+                engineering.</p>
+        </header>
+
+        <section>
+            <h2>🛠️ Technical Skill Matrix</h2>
+            <ul>
+                <li><strong>Cloud Architecture & Networking:</strong> AWS VPC topology configuration, Public/Private
+                    Subnets, Application Load Balancers (ALB), Route 53 Geolocation/Failover mapping, NAT Gateways,
+                    Security Group access matrices.</li>
+                <li><strong>Infrastructure as Code:</strong> Immutable platform provisioning using automated Terraform
+                    modules and Target Group declarations.</li>
+                <li><strong>Containerization & Orchestration:</strong> High-security Docker engineering utilizing
+                    multi-stage caching layers and minimal distroless base image files.</li>
+                <li><strong>CI/CD Pipelines:</strong> Programmatic code quality, build automation, and rolling
+                    zero-downtime container deployments using GitHub Actions.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>📂 Featured Production Engineering Projects</h2>
+
+            <!-- Project 1 -->
+            <div class="project-card">
+                <h3>📦 Project 1: Go-Backend Multi-Stage Distroless Docker Build</h3>
+                <p>Designed a highly optimized multi-stage build that compiles a Golang backend inside a build
+                    container, strips out all non-runtime binary dependencies, and ships it inside a secure,
+                    attack-surface-free distroless image file to protect system compute layers.</p>
+                <pre>
+FROM golang:1.23-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/backend-engine .
+
+FROM gcr.io/distroless/static-debian12:latest
+WORKDIR /
+COPY --from=builder /app/backend-engine /backend-engine
+EXPOSE 5000
+USER 65532:65532
+ENTRYPOINT ["/backend-engine"]</pre>
+                <a href="https://github.com" class="btn" target="_blank">View GitHub Repository</a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <h3>🧱 Project 2: Terraform Multi-AZ Private Subnet & ALB Blueprint</h3>
+                <p>Automated a resilient single-VPC architecture spanning multiple Availability Zones using Terraform.
+                    Provisions network routes, configures Public ALBs, maps Nginx reverse proxy routing targets, and
+                    links Private ALBs to application Auto Scaling Target Groups.</p>
+                <pre>
+resource "aws_lb" "private_alb" {
+  name               = "private-internal-alb"
+  internal           = true 
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.private_alb_sg.id]
+  subnets            = [aws_subnet.private_az1.id, aws_subnet.private_az2.id]
+}
+
+resource "aws_lb_target_group" "backend_app_tg" {
+  name        = "private-backend-target-group"
+  port        = 5000 
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.main_vpc.id
+  target_type = "instance"
+}</pre>
+                <a href="https://github.com" class="btn" target="_blank">View GitHub Repository</a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <h3>🔄 Project 3: Zero-Downtime ASG Rolling Update GitOps Pipeline</h3>
+                <p>Programmed an automated GitHub Actions pipeline. Triggered by repository commits, it manages syntax
+                    verification, runs testing modules, handles remote AWS registry uploads, and invokes native Auto
+                    Scaling Group Instance Refreshes for zero-downtime rolling updates.</p>
+                <pre>
+- name: Build, Tag, and Push Secure Docker Image
+  run: |
+    docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+    docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+- name: Trigger ASG Zero-Downtime Instance Rolling Update
+  run: |
+    aws autoscaling start-instance-refresh \
+      --auto-scaling-group-name prod-backend-asg \
+      --preferences '{"MinHealthyPercentage": 50}'</pre>
+                <a href="https://github.com" class="btn" target="_blank">View GitHub Repository</a>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
