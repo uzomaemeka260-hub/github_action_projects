@@ -31,5 +31,5 @@ jobs:
         steps:
           - name: Display Run Name
             run: |
-              echo "Run Name: ${{ github.run_name }}"    
+              echo "Run Name: ${{ vars.run_name }}"    
           
