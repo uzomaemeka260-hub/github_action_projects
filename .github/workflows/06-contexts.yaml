@@ -1,4 +1,5 @@
 name: 06 - contexts
+run-name: ${{ vars.run_name }}
 
 on:
   push:
