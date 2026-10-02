@@ -25,12 +25,5 @@ jobs:
               echo "Run ID: ${{github.run_id}}"
           - name: Retrieve Variable
             run: |
-              echo "Variable Value: ${{ vars.MY_VAR }}"
-
-    run-name:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Display Run Name
-            run: |
-              echo "Run Name: ${{ vars.run_name }}"    
+              echo "Variable Value: ${{ vars.MY_VAR }}"  
           
