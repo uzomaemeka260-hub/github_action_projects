@@ -1,5 +1,5 @@
 name: 06 - contexts
-run-name: ${{ vars.run_name }}
+run-name: 06 - contexts | DEBUG - ${{ inputs.debug }}
 
 on:
   push:
